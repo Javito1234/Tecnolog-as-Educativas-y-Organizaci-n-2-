@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecnologías Educativas y Organización</title>
+  <style>
+    /* ======== VARIABLES Y BASE ======== */
+    :root {
+      --color-primario: #2563eb;
+      --color-secundario: #1e293b;
+      --color-fondo: #f8fafc;
+      --color-card: #ffffff;
+      --color-texto: #334155;
+      --color-resaltado: #e0f2fe;
+      --sombra: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+    }
+
+    /* ======== CABECERA ======== */
+    header {
+      background: linear-gradient(120deg, var(--color-primario), #60a5fa);
+      color: #fff;
+      text-align: center;
+      padding: 3.5rem 1rem 3rem;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      box-shadow: var(--sombra);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    header p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    /* ======== CONTENEDOR PRINCIPAL ======== */
+    main {
+      max-width: 1000px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ======== SECCIÓN INTRODUCCIÓN ======== */
+    .intro {
+      background: var(--color-card);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--sombra);
+      border-top: 4px solid var(--color-primario);
+    }
+
+    .intro h2 {
+      font-size: 1.8rem;
+      color: var(--color-primario);
+      margin-bottom: 1rem;
+    }
+
+    .intro p {
+      font-size: 1.05rem;
+      color: var(--color-texto);
+    }
+
+    /* ======== TARJETAS ======== */
+    .card {
+      background: var(--color-card);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--sombra);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
+      border-top: 4px solid var(--color-primario);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+      color: var(--color-primario);
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .highlight {
+      background: var(--color-resaltado);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: left;
+      margin-top: 1rem;
+    }
+
+    .highlight ul {
+      list-style-type: "✨ ";
+      padding-left: 1rem;
+    }
+
+    .highlight li {
+      margin: .4rem 0;
+    }
+
+    .small {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 0.8rem;
+    }
+
+    a {
+      color: var(--color-primario);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ======== BOTONES DE TUTORIAL ======== */
+    .tutorial-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-tutorial {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--color-primario), #3b82f6);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-tutorial:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #64748b, #475569);
+      box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 6px 20px rgba(100, 116, 139, 0.4);
+    }
+
+    .icon {
+      font-size: 1.2rem;
+    }
+
+    /* ======== PIE DE PÁGINA ======== */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #64748b;
+      padding: 2rem 1rem;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    /* ======== RESPONSIVIDAD ======== */
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .card { padding: 1.5rem; }
+      .intro h2 { font-size: 1.5rem; }
+      .tutorial-buttons { flex-direction: column; }
+      .btn-tutorial { width: 100%; justify-content: center; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Tecnologías Educativas y Organización</h1>
+    <p>Descubrí las mejores herramientas digitales para organizar tus estudios, mejorar tu memoria, mantener la concentración y aprender con ayuda de la tecnología.</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>Introducción</h2>
+      <p>La educación moderna se apoya en herramientas digitales que potencian la organización, la productividad y la comprensión. Estas aplicaciones no solo facilitan el estudio, sino que también promueven la autonomía, la colaboración y la creatividad.</p>
+      <p>En esta guía conocerás distintas aplicaciones que te ayudarán a organizar tus materias, mejorar tu enfoque, estudiar de forma interactiva y aprovechar la inteligencia artificial y la realidad aumentada en tu aprendizaje.</p>
+    </section>
+
+    <!-- Notion -->
+    <section class="card">
+      <h2>Notion</h2>
+      <p>Una plataforma todo-en-uno para organizar notas, tareas, proyectos y bases de datos personalizadas.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> planificación de materias, apuntes, seguimiento de trabajos.</li>
+          <li><strong>Funciones:</strong> plantillas, bases de datos, sincronización y colaboración.</li>
+          <li><strong>Ventaja:</strong> reemplaza múltiples apps en una sola interfaz limpia.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://www.notion.so/help/guides" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Tutoriales Oficiales
+        </a>
+        <a href="https://www.notion.so/" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a Notion
+        </a>
+      </div>
+    </section>
+
+    <!-- Trello -->
+    <section class="card">
+      <h2>Trello</h2>
+      <p>Organizá tus proyectos y tareas con tableros visuales que muestran el progreso de forma clara y dinámica.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> gestión de cronogramas, proyectos grupales y pendientes.</li>
+          <li><strong>Funciones:</strong> etiquetas, automatización, calendario y vistas personalizables.</li>
+          <li><strong>Ventaja:</strong> interfaz visual e intuitiva.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://trello.com/guide" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Guía Oficial
+        </a>
+        <a href="https://trello.com" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a Trello
+        </a>
+      </div>
+    </section>
+
+    <!-- Anki -->
+    <section class="card">
+      <h2>Anki</h2>
+      <p>Aplicación de tarjetas de memoria (flashcards) basada en repetición espaciada para aprender de forma eficiente.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> memorizar vocabulario, fórmulas o conceptos clave.</li>
+          <li><strong>Funciones:</strong> estadísticas, sincronización, sonido e imágenes.</li>
+          <li><strong>Ventaja:</strong> aprendizaje duradero y adaptado al ritmo del estudiante.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://docs.ankiweb.net/" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Documentación Oficial
+        </a>
+        <a href="https://apps.ankiweb.net/" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a Anki
+        </a>
+      </div>
+    </section>
+
+    <!-- Quizlet -->
+    <section class="card">
+      <h2>Quizlet</h2>
+      <p>Permite estudiar mediante tarjetas interactivas, juegos y pruebas personalizadas creadas por estudiantes o docentes.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> repaso de conceptos, idiomas, fechas o definiciones.</li>
+          <li><strong>Funciones:</strong> modo test, aprendizaje colaborativo y juegos.</li>
+          <li><strong>Ventaja:</strong> aprendizaje activo y divertido.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://help.quizlet.com/" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Centro de Ayuda
+        </a>
+        <a href="https://quizlet.com" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a Quizlet
+        </a>
+      </div>
+    </section>
+
+    <!-- Forest -->
+    <section class="card">
+      <h2>Forest</h2>
+      <p>Aplicación que promueve la concentración mediante la gamificación: plantás un árbol virtual mientras evitás distracciones.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> enfoque en sesiones Pomodoro y estudio sin interrupciones.</li>
+          <li><strong>Funciones:</strong> temporizador, estadísticas y recompensas.</li>
+          <li><strong>Ventaja:</strong> fomenta la productividad y reduce el uso del móvil.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://www.forestapp.cc/faq/" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Preguntas Frecuentes
+        </a>
+        <a href="https://www.forestapp.cc/" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a Forest
+        </a>
+      </div>
+    </section>
+
+    <!-- Brain.fm -->
+    <section class="card">
+      <h2>Brain.fm</h2>
+      <p>Ofrece música con inteligencia artificial para mejorar la concentración, la relajación y el descanso.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> aumentar el enfoque durante el estudio.</li>
+          <li><strong>Funciones:</strong> modos focus, relax y sleep.</li>
+          <li><strong>Ventaja:</strong> sonido diseñado científicamente para estimular el cerebro.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://www.brain.fm/science" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Ciencia detrás de Brain.fm
+        </a>
+        <a href="https://www.brain.fm" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a Brain.fm
+        </a>
+      </div>
+    </section>
+
+    <!-- ChatGPT -->
+    <section class="card">
+      <h2>ChatGPT</h2>
+      <p>Asistente virtual basado en IA que responde preguntas, redacta textos y explica temas complejos.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> apoyo en redacción, investigación y comprensión de contenidos.</li>
+          <li><strong>Funciones:</strong> generación de ideas, ejemplos y explicaciones.</li>
+          <li><strong>Ventaja:</strong> respuesta inmediata y adaptable al nivel del estudiante.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://help.openai.com/en/" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Centro de Ayuda OpenAI
+        </a>
+        <a href="https://chat.openai.com" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a ChatGPT
+        </a>
+      </div>
+    </section>
+
+    <!-- PhET -->
+    <section class="card">
+      <h2>PhET Simulaciones</h2>
+      <p>Simulaciones interactivas que permiten experimentar con fenómenos científicos y matemáticos desde el navegador.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> experimentos virtuales y prácticas sin necesidad de laboratorio.</li>
+          <li><strong>Funciones:</strong> simulaciones 2D/3D, multilenguaje y gratuitas.</li>
+          <li><strong>Ventaja:</strong> aprendizaje visual e interactivo.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://phet.colorado.edu/es/teaching-resources" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Ver Recursos para Docentes
+        </a>
+        <a href="https://phet.colorado.edu" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ir a PhET
+        </a>
+      </div>
+    </section>
+
+    <!-- Realidad Aumentada / Virtual -->
+    <section class="card">
+      <h2>Realidad Aumentada y Virtual</h2>
+      <p>Permite explorar entornos y objetos digitales inmersivos que enriquecen la experiencia educativa.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> visualizar anatomía, historia, física o arte en 3D.</li>
+          <li><strong>Funciones:</strong> modelos 3D, recorridos y simulaciones.</li>
+          <li><strong>Ventaja:</strong> aprendizaje inmersivo y motivador.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://arvr.google.com/intl/es_mx/ar/" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Explorar Google AR
+        </a>
+        <a href="https://www.meta.com/quest/" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ver Meta Quest
+        </a>
+      </div>
+    </section>
+
+    <!-- Tutores Virtuales -->
+    <section class="card">
+      <h2>Tutores Virtuales</h2>
+      <p>Sistemas con inteligencia artificial que guían al estudiante según su ritmo de aprendizaje.</p>
+      <div class="highlight">
+        <ul>
+          <li><strong>Uso educativo:</strong> asistencia personalizada y feedback en tiempo real.</li>
+          <li><strong>Funciones:</strong> ejercicios adaptativos y monitoreo del progreso.</li>
+          <li><strong>Ventaja:</strong> aprendizaje personalizado e interactivo.</li>
+        </ul>
+      </div>
+      <div class="tutorial-buttons">
+        <a href="https://www.khanacademy.org/" target="_blank" class="btn-tutorial">
+          <span class="icon">📚</span>
+          Explorar Khan Academy
+        </a>
+        <a href="https://www.duolingo.com/" target="_blank" class="btn-tutorial btn-secondary">
+          <span class="icon">🌐</span>
+          Ver Duolingo
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 | Guía educativa elaborada con fines académicos y de apoyo al aprendizaje.</p>
+  </footer>
+</body>
+</html>

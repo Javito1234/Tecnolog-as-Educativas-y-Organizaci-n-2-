@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <title>Tecnologías Educativas y Organización</title>
+  <style>
+    /* ... Todo el CSS de tu archivo original ... */
+    /* ======== NUEVA SECCIÓN DE BOTÓN DE DESCARGA ======== */
+    .download-section {
+      background: var(--color-card);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--sombra);
+      border-top: 4px solid #f97316; /* Nuevo color para diferenciar */
+      margin-top: 2rem;
+    }
+    /* ... Estilos específicos para el componente de React si es necesario ... */
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="card download-section">
+      <h2>Generador de Afiche de Promoción 🖼️</h2>
+      <p>Descargá un afiche A4 listo para imprimir con el código QR de esta página.</p>
+      
+      <div id="qr-poster-generator-root">
+        Cargando generador de afiche...
+      </div>
+    </section>
+
+    </main>
+
+  <footer>
+    </footer>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    // const Download = ({ size }) => <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>;
+    const Download = (props) => (
+      <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+    ); // Sustitución simple de lucide-react Download
+
+    function QRPosterGenerator() {
+      // ... EL RESTO DEL CÓDIGO DEL SEGUNDO BLOQUE (QRPosterGenerator) ...
+      // **IMPORTANTE:** Reemplaza la clase "min-h-screen bg-gradient-to-br from-orange-100 to-yellow-100 p-8"
+      // y otras clases de Tailwind CSS por los estilos de tu CSS original.
+      
+      const [qrDataUrl, setQrDataUrl] = useState('');
+      const canvasRef = useRef(null);
+      const url = 'https://javito1234.github.io/Tecnolog-as-Educativas-y-Organizaci-n/'; // Revisa esta URL
+
+      useEffect(() => {
+        // Generar QR code usando API pública
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}`;
+        setQrDataUrl(qrUrl);
+      }, []);
+
+      // MANTENER drawPoster, roundRect, drawStudentIllustration, drawLightBulb, drawToolIcons, drawPoints
+
+      const drawPoster = async () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const width = 794;
+        const height = 1123;
+
+        // Configurar canvas
+        canvas.width = width;
+        canvas.height = height;
+
+        // Fondo naranja
+        ctx.fillStyle = '#D17A4A';
+        ctx.fillRect(0, 0, width, height);
+
+        // Panel crema central
+        ctx.fillStyle = '#FFF8E7';
+        roundRect(ctx, 50, 80, 694, 963, 8);
+
+        // Título
+        ctx.fillStyle = '#2C2C2C';
+        ctx.font = '300 28px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Productividad, Organización', width / 2, 160);
+
+        ctx.font = 'bold 42px Arial';
+        ctx.fillText('Y APRENDIZAJE INTELIGENTE', width / 2, 200);
+
+        // Dibujar ilustración del estudiante
+        drawStudentIllustration(ctx, 297, 230);
+
+        // Dibujar bombilla
+        drawLightBulb(ctx, 540, 270);
+
+        // Dibujar íconos de herramientas
+        drawToolIcons(ctx);
+
+        // Dibujar los 6 puntos
+        drawPoints(ctx);
+
+        // Sección inferior amarilla
+        ctx.fillStyle = '#F4C430';
+        roundRect(ctx, 100, 880, 594, 120, 8);
+
+        // Texto motivacional
+        ctx.fillStyle = '#2C2C2C';
+        ctx.font = 'bold 16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Organizá tus tareas, estudiá más fácil y desarrollá', 400, 915);
+        ctx.fillText('hábitos inteligentes con recursos digitales', 400, 940);
+
+        // Cargar y dibujar QR code real
+        if (qrDataUrl) {
+          const qrImg = new Image();
+          qrImg.crossOrigin = 'anonymous';
+          qrImg.onload = () => {
+            ctx.drawImage(qrImg, 240, 955, 80, 80);
+            
+            // URL
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('Escaneá para acceder:', 335, 975);
+            ctx.font = 'bold 9px Arial';
+            ctx.fillText('javito1234.github.io/', 335, 993);
+            ctx.fillText('Tecnologias-Educativas-y-Organizacion', 335, 1007);
+          };
+          qrImg.src = qrDataUrl;
+        }
+
+        // Footer
+        ctx.font = '14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'white';
+        ctx.fillText('Tecnologías Educativas y Organización | UTU', width / 2, 1085);
+      };
+
+      const roundRect = (ctx, x, y, width, height, radius) => {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.closePath();
+        ctx.fill();
+      };
+
+      const drawStudentIllustration = (ctx, x, y) => {
+        // Laptop
+        ctx.fillStyle = '#4A90E2';
+        roundRect(ctx, x + 20, y + 110, 160, 100, 4);
+        ctx.fillStyle = '#87CEEB';
+        roundRect(ctx, x + 25, y + 115, 150, 85, 0);
+        ctx.fillStyle = '#3A7BC8';
+        roundRect(ctx, x, y + 210, 200, 8, 2);
+
+        // Pantalla con líneas
+        ctx.fillStyle = 'rgba(74, 144, 226, 0.6)';
+        ctx.fillRect(x + 35, y + 125, 40, 4);
+        ctx.fillRect(x + 35, y + 135, 60, 4);
+        ctx.fillRect(x + 35, y + 145, 50, 4);
+
+        // Cabeza
+        ctx.fillStyle = '#F4A460';
+        ctx.beginPath();
+        ctx.arc(x + 100, y + 60, 32, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cabello
+        ctx.fillStyle = '#8B4513';
+        ctx.beginPath();
+        ctx.moveTo(x + 70, y + 55);
+        ctx.quadraticCurveTo(x + 68, y + 30, x + 85, y + 25);
+        ctx.quadraticCurveTo(x + 100, y + 22, x + 115, y + 25);
+        ctx.quadraticCurveTo(x + 132, y + 30, x + 130, y + 55);
+        ctx.lineTo(x + 125, y + 60);
+        ctx.quadraticCurveTo(x + 120, y + 45, x + 100, y + 45);
+        ctx.quadraticCurveTo(x + 80, y + 45, x + 75, y + 60);
+        ctx.closePath();
+        ctx.fill();
+
+        // Ojos y gafas
+        ctx.fillStyle = '#2C2C2C';
+        ctx.beginPath();
+        ctx.ellipse(x + 88, y + 58, 3, 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(x + 112, y + 58, 3, 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(x + 89, y + 57, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x + 113, y + 57, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Marcos de gafas
+        ctx.strokeStyle = '#2C2C2C';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(x + 88, y + 58, 10, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x + 112, y + 58, 10, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + 98, y + 58);
+        ctx.lineTo(x + 102, y + 58);
+        ctx.stroke();
+
+        // Sonrisa
+        ctx.beginPath();
+        ctx.moveTo(x + 92, y + 68);
+        ctx.quadraticCurveTo(x + 100, y + 72, x + 108, y + 68);
+        ctx.stroke();
+
+        // Cuerpo
+        ctx.fillStyle = '#F4C430';
+        roundRect(ctx, x + 70, y + 88, 60, 70, 4);
+
+        // Brazos
+        roundRect(ctx, x + 50, y + 100, 20, 50, 8);
+        roundRect(ctx, x + 130, y + 100, 20, 50, 8);
+
+        // Manos
+        ctx.fillStyle = '#F4A460';
+        ctx.beginPath();
+        ctx.ellipse(x + 60, y + 155, 8, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(x + 140, y + 155, 8, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+      };
+
+      const drawLightBulb = (ctx, x, y) => {
+        // Círculo de fondo
+        ctx.fillStyle = 'rgba(255, 232, 124, 0.3)';
+        ctx.beginPath();
+        ctx.arc(x, y, 25, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Bombilla
+        ctx.fillStyle = '#FFD700';
+        ctx.beginPath();
+        ctx.moveTo(x - 8, y - 15);
+        ctx.lineTo(x - 8, y - 5);
+        ctx.quadraticCurveTo(x - 8, y + 5, x, y + 8);
+        ctx.quadraticCurveTo(x + 8, y + 5, x + 8, y - 5);
+        ctx.lineTo(x + 8, y - 15);
+        ctx.quadraticCurveTo(x + 8, y - 25, x, y - 25);
+        ctx.quadraticCurveTo(x - 8, y - 25, x - 8, y - 15);
+        ctx.closePath();
+        ctx.fill();
+
+        // Base
+        ctx.fillStyle = '#E6C200';
+        roundRect(ctx, x - 6, y + 8, 12, 8, 2);
+
+        // Rayos
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x - 15, y - 10);
+        ctx.lineTo(x - 20, y - 10);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + 15, y - 10);
+        ctx.lineTo(x + 20, y - 10);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x - 12, y - 20);
+        ctx.lineTo(x - 16, y - 24);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + 12, y - 20);
+        ctx.lineTo(x + 16, y - 24);
+        ctx.stroke();
+      };
+
+      const drawToolIcons = (ctx) => {
+        // Notion
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = '#2C2C2C';
+        ctx.lineWidth = 2;
+        roundRect(ctx, 120, 250, 30, 30, 4);
+        ctx.stroke();
+        ctx.fillStyle = '#2C2C2C';
+        ctx.font = '20px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('N', 135, 272);
+
+        // Trello
+        ctx.fillStyle = '#0079BF';
+        roundRect(ctx, 640, 350, 30, 30, 4);
+        ctx.fillStyle = 'white';
+        roundRect(ctx, 646, 356, 8, 18, 1);
+        roundRect(ctx, 656, 356, 8, 12, 1);
+
+        // Anki
+        ctx.fillStyle = '#00A0DC';
+        ctx.beginPath();
+        ctx.arc(115, 395, 15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 16px Arial';
+        ctx.fillText('A', 115, 401);
+      };
+
+      const drawPoints = (ctx) => {
+        const points = [
+          { num: 1, x: 100, y: 530, title: 'ORGANIZACIÓN DIGITAL', lines: [
+            'Notion y Trello para gestionar',
+            'tareas, proyectos y mantener todo',
+            'organizado en un solo lugar.'
+          ]},
+          { num: 2, x: 420, y: 530, title: 'TÉCNICAS DE ESTUDIO', lines: [
+            'Métodos efectivos y estrategias',
+            'probadas para maximizar tu',
+            'aprendizaje y retención.'
+          ]},
+          { num: 3, x: 100, y: 650, title: 'MEMORIZACIÓN CON ANKI', lines: [
+            'Potente herramienta para retener',
+            'información a largo plazo de manera',
+            'efectiva y científica.'
+          ]},
+          { num: 4, x: 420, y: 650, title: 'PRODUCTIVIDAD', lines: [
+            'Forest te ayuda a mantener la',
+            'concentración y evitar distracciones',
+            'mientras estudiás.'
+          ]},
+          { num: 5, x: 100, y: 770, title: 'RECURSOS GRATUITOS', lines: [
+            'Khan Academy ofrece contenido',
+            'educativo de calidad para complementar',
+            'tu aprendizaje en múltiples áreas.'
+          ]},
+          { num: 6, x: 420, y: 770, title: 'COLABORACIÓN CON NOTION', lines: [
+            'Trabaja en equipo, comparte',
+            'conocimiento y colabora en proyectos',
+            'de forma eficiente.'
+          ]}
+        ];
+
+        points.forEach(point => {
+          // Círculo con número
+          ctx.fillStyle = '#D17A4A';
+          ctx.beginPath();
+          ctx.arc(point.x + 30, point.y, 24, 0, Math.PI * 2);
+          ctx.fill();
+          
+          ctx.fillStyle = 'white';
+          ctx.font = 'bold 32px Arial';
+          ctx.textAlign = 'center';
+          ctx.fillText(point.num, point.x + 30, point.y + 8);
+
+          // Título
+          ctx.fillStyle = '#2C2C2C';
+          ctx.font = 'bold 20px Arial';
+          ctx.textAlign = 'left';
+          ctx.fillText(point.title, point.x + 70, point.y - 5);
+
+          // Líneas descriptivas
+          ctx.fillStyle = '#4A4A4A';
+          ctx.font = '13px Arial';
+          point.lines.forEach((line, i) => {
+            ctx.fillText(line, point.x + 70, point.y + 20 + (i * 18));
+          });
+        });
+      };
+
+      useEffect(() => {
+        if (qrDataUrl) {
+          const timer = setTimeout(() => {
+            drawPoster();
+          }, 500);
+          return () => clearTimeout(timer);
+        }
+      }, [qrDataUrl]);
+
+      const downloadPoster = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const link = document.createElement('a');
+        link.download = 'afiche-tecnologias-educativas-A4.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      };
+
+      return (
+        <div className="react-container">
+          <div className="react-card">
+            <p className="text-gray-600 text-center mb-6">
+              Tu afiche A4 listo para imprimir con QR code funcional
+            </p>
+
+            <div style={{ padding: '1rem', marginBottom: '1rem', borderLeft: '4px solid #10b981', backgroundColor: '#ecfdf5' }}>
+              <p style={{ fontSize: '0.875rem', color: '#065f46' }}>
+                ✅ QR code funcional generado<br/>
+                ✅ Enlace: javito1234.github.io/Tecnolog-as-Educativas-y-Organizaci-n/<br/>
+                ✅ Formato A4 (794 × 1123 px)<br/>
+                ✅ Alta resolución para impresión
+              </p>
+            </div>
+
+            <button
+              onClick={downloadPoster}
+              className="btn-tutorial"
+              style={{ width: '100%', justifyContent: 'center', background: 'linear-gradient(135deg, #f97316, #ea580c)' }}
+            >
+              <Download size={24} />
+              Descargar Afiche A4 (PNG Alta Resolución)
+            </button>
+
+            <p className="small" style={{ marginTop: '0.5rem', textAlign: 'center' }}>
+              💡 El QR está completamente funcional. Simplemente descargá e imprimí en formato A4
+            </p>
+          </div>
+
+          <div style={{ marginTop: '2rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '1rem', color: 'var(--color-primario)' }}>
+              Vista Previa del Afiche
+            </h3>
+            <div style={{ overflow: 'auto', maxHeight: '500px', border: '2px solid #f97316', borderRadius: '8px' }}>
+              <canvas
+                ref={canvasRef}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
+    // 6. Montar el componente de React en el contenedor
+    const domContainer = document.querySelector('#qr-poster-generator-root');
+    const root = ReactDOM.createRoot(domContainer);
+    root.render(<QRPosterGenerator />);
+  </script>
+</body>
+</html>
